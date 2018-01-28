@@ -6,10 +6,10 @@
 GET     /                           controllers.HomeController.index
 # An example controller showing how to use dependency injection
 
-#GET /goods/:name 指定した商品情報のJSONを表示する
-#POST /goods 新しく商品を作成する
-#PUT /goods/:name 指定した商品を編集する
-#DELETE /goods/:name 指定した商品を編集する
+#GET /catalog/:id 指定した商品情報のJSONを表示する
+#POST /catalog 新しく商品を作成する
+#PUT /catalog/:id 指定した商品を編集する
+#DELETE /searchcatalog?name= 指定した商品を編集する
 
 POST  /catalog  controllers.CatalogsRestController.addCatalog
 

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Catalog extends Model {
 
     @Id
-    public Long id;
+    public long id;
 
     public int value;
 
@@ -20,4 +20,12 @@ public class Catalog extends Model {
     public String imgUrl;
 
     public static Finder<Long, Catalog> find = new Finder<Long,Catalog>(Catalog.class);
+
+    public Catalog(long id, int value, String name, String intro, String imgUrl) {
+        this.id = id;
+        this.value = value;
+        this.name = name;
+        this.intro = intro;
+        this.imgUrl = imgUrl;
+    }
 }

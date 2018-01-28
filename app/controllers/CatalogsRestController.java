@@ -1,21 +1,17 @@
 package controllers;
 
-
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Catalog;
-import play.Application;
 import static play.libs.Json.toJson;
 import play.libs.Json;
 import play.mvc.*;
-import play.db.*;
 
-import javax.inject.Inject;
-import java.sql.*;
 import java.util.List;
 
 public class CatalogsRestController extends Controller {
-    //Post
+
+    //商品登録
     @BodyParser.Of(BodyParser.Json.class)
     public Result addCatalog(){
         JsonNode json = request().body().asJson();
@@ -23,35 +19,39 @@ public class CatalogsRestController extends Controller {
          Catalog catalog = Json.fromJson(json, Catalog.class);
 
          if(catalog.toString().equals("")){
-             return badRequest("Miss");
+             return badRequest("登録データが空文字です");
          }
 
          catalog.save();
          return ok();
     }
-    //Get
+
+    //商品全件取得
     public Result getCatalog(){
 
         List<Catalog> catalogs = new Model.Finder(String.class,Catalog.class).all();
 
         return ok(toJson(catalogs));
     }
-    //Get(id)
+
+    //商品1件取得
     public Result getCatalogItem(Long id){
         Catalog catalog = Catalog.find.byId(id);
 
         if(catalog == null){
-            return notFound("catalog not found");
+            return notFound("商品データが見つかりません");
         }
 
         return ok(toJson(catalog));
     }
-    //Put
+
+    //商品1件更新
     @BodyParser.Of(BodyParser.Json.class)
     public Result putCatalogItem(Long id){
         Catalog catalog = Catalog.find.byId(id);
+
         if(catalog == null){
-            return notFound("catalog not found");
+            return notFound("商品データが見つかりません");
         }
 
         JsonNode json = request().body().asJson();
@@ -62,11 +62,12 @@ public class CatalogsRestController extends Controller {
         return ok();
     }
 
-    //Delete
+    //商品1件削除
     public Result deleteCatalog(Long id){
         Catalog catalog = Catalog.find.byId(id);
+
         if(catalog == null){
-            return notFound("catalog not found");
+            return notFound("商品データが見つかりません");
         }
 
         catalog.delete();
@@ -74,7 +75,7 @@ public class CatalogsRestController extends Controller {
 
     }
 
-    //Search
+    //商品検索
     public Result searchCatalog(String name){
         List<Catalog> catalog = Catalog.find.where().like("name", "%"+name+"%").findList();
         if(catalog == null){
@@ -83,7 +84,4 @@ public class CatalogsRestController extends Controller {
 
         return ok(toJson(catalog));
     }
-
-
-
 }
