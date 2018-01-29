@@ -75,13 +75,4 @@ public class CatalogsRestController extends Controller {
 
     }
 
-    //商品検索
-    public Result searchCatalog(String name){
-        List<Catalog> catalog = Catalog.find.where().like("name", "%"+name+"%").findList();
-        if(catalog == null){
-            return notFound("catalog not found");
-        }
-
-        return ok(toJson(catalog));
-    }
 }
