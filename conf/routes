@@ -6,25 +6,14 @@
 GET     /                           controllers.HomeController.index
 # An example controller showing how to use dependency injection
 
-#GET /goods/:name 指定した商品情報のJSONを表示する
-#POST /goods 新しく商品を作成する
-#PUT /goods/:name 指定した商品を編集する
-#DELETE /goods/:name 指定した商品を編集する
 
 POST  /catalog  controllers.CatalogsRestController.addCatalog
 
-GET  /catalog   controllers.CatalogsRestController.getCatalog
+GET  /catalog/   controllers.CatalogsRestController.getCatalog
 
 GET /catalog/:id  controllers.CatalogsRestController.getCatalogItem(id: Long)
 
 PUT /catalog/:id  controllers.CatalogsRestController.putCatalogItem(id: Long)
 
-GET /searchcatalog  controllers.CatalogsRestController.searchCatalog(name: String)
+DELETE  /catalog/:id    controllers.CatalogsRestController.deleteCatalogItem(id: Long)
 
-DELETE  /catalog/:id    controllers.CatalogsRestController.deleteCatalog(id: Long)
-
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
-
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
