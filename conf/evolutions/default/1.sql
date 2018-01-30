@@ -5,7 +5,7 @@
 
 create table catalog (
   id                            bigint auto_increment not null,
-  value                         integer,
+  price                         integer,
   name                          varchar(255),
   intro                         varchar(255),
   img_url                       varchar(255),

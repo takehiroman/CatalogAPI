@@ -17,3 +17,11 @@
 |商品一件更新|PUT|/catalog/{id}|
 |商品一件削除|DELETE|/catalog/{id}|
 |商品全件取得|GET|/catalog/|
+
+### 開発環境のセットアップ
+
+1. このプロジェクトを`git clone`する
+2. プロジェクト内に移動し，`brew install sbt`でsbtをインストールする
+3. `brew install mysql`でMySQLをインストールし，`mysql.server start`で起動する
+4. インストールが完了したら，`sbt run`でアプリケーションを起動する
+5. 起動後に，localhost:9000で各APIを利用することができる。

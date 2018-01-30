@@ -6,6 +6,7 @@ import models.Catalog;
 import static play.libs.Json.toJson;
 import play.libs.Json;
 import play.mvc.*;
+import play.data.Form;
 
 import java.util.List;
 
@@ -16,25 +17,13 @@ public class CatalogsRestController extends Controller {
     public Result addCatalog(){
         JsonNode json = request().body().asJson();
 
-        if(json.toString().equals("{}")){
-            return badRequest("商品データがありません");
-        }
 
          Catalog catalog = Json.fromJson(json, Catalog.class);
+         Form<Catalog> form = Form.form(Catalog.class).bindFromRequest();
 
-         if(catalog.name == null){
-             return badRequest("商品名のデータがありません");
+         if(form.hasErrors()){
+             return badRequest(form.errorsAsJson());
          }
-         if(catalog.intro == null){
-             return badRequest("説明文のデータがありません");
-         }
-         if(catalog.imgUrl == null){
-             return badRequest("画像URLのデータがありません");
-         }
-        if(catalog.value == 0){
-             return badRequest("値段のデータがありません");
-         }
-
          catalog.save();
          return created();
     }
