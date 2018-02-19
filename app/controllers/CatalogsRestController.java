@@ -57,12 +57,20 @@ public class CatalogsRestController extends Controller {
             return notFound("商品データが見つかりません");
         }
 
-        JsonNode json = request().body().asJson();
-        Catalog catalogToBe = Json.fromJson(json, Catalog.class);
-        catalog = catalogToBe;
-        catalog.update();
+        Form<Catalog> form = Form.form(Catalog.class).bindFromRequest();
 
-        return noContent();
+        if(!form.hasErrors()){
+            JsonNode json = request().body().asJson();
+            Catalog catalogToBe = Json.fromJson(json, Catalog.class);
+            catalog = catalogToBe;
+            catalog.update();
+
+            return noContent();
+
+        } else{
+            return badRequest(form.errorsAsJson());
+        }
+
     }
 
     //商品1件削除

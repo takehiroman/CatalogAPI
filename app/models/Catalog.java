@@ -3,6 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Required;
+import play.data.validation.Constraints.
 import play.data.validation.Constraints.Min;
 
 import javax.persistence.Entity;
